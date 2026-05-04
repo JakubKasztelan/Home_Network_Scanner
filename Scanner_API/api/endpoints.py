@@ -1,7 +1,9 @@
 from fastapi import APIRouter
+from starlette.responses import FileResponse
 
 from services.Analyzer import SecurityAnalyzer
 from services.AuditEngine import AuditEngine
+from services.ReportGenerator import ReportGenerator
 
 router = APIRouter()
 
@@ -26,3 +28,15 @@ async def start_audit():
             } for d in devices
         ]
     }
+
+
+@router.post("/audit/report")
+async def create_report(audit_data: dict):
+    generator = ReportGenerator()
+
+    path = generator.generate_technical_report(
+        devices=audit_data["devices"],
+        health_score=audit_data["health_score"]
+    )
+
+    return FileResponse(path, filename="Home_Network_Report.pdf")
