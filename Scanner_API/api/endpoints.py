@@ -8,7 +8,7 @@ from services.ReportGenerator import ReportGenerator
 router = APIRouter()
 
 
-@router.post("/api/audit/start")
+@router.post("/audit/start")
 async def start_audit():
     engine = AuditEngine()
     analyzer = SecurityAnalyzer()
