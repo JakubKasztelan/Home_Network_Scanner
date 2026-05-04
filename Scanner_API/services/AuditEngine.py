@@ -6,7 +6,7 @@ from models.device import DeviceProfile
 
 
 class AuditEngine:
-    def perform_ping_scan(self, interface: str = "eth0") -> list[DeviceProfile]:
+    def perform_ping_scan(self) -> list[DeviceProfile]:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.connect(("8.8.8.8", 80))
