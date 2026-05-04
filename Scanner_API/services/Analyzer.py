@@ -18,3 +18,6 @@ class SecurityAnalyzer:
                     total_deduction += self.vulnerability_db[port]["weight"]
 
         return max(0, 100 - total_deduction)
+
+    def translate_to_plain_english(self, port: int) -> str:
+        return self.vulnerability_db.get(port, {}).get("label", "Unknown Vulnerability")
