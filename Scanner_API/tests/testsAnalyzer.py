@@ -1,6 +1,7 @@
 import pytest
 
 from models.device import DeviceProfile
+from services.Analyzer import SecurityAnalyzer
 
 
 def test_security_score_calculation():
