@@ -4,7 +4,7 @@ from main import app
 client = TestClient(app)
 
 def test_api_audit_integration():
-    response = client.post("/audit/start")
+    response = client.post("api/audit/start")
 
     assert response.status_code == 200
     data = response.json()

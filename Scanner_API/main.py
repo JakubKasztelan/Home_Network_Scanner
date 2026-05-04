@@ -1,13 +1,10 @@
 from fastapi import FastAPI
+from api.endpoints import router as audit_router
 
 app = FastAPI()
 
+app.include_router(audit_router, prefix="/api", tags=["Audit"])
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+    return {"message": "Network Scanner API is Active"}

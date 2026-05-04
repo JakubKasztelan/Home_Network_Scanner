@@ -24,7 +24,11 @@ class AuditEngine:
 
             result = srp(packet, timeout=2, verbose=False)[0]
 
-            devices = []
+            devices = [DeviceProfile(
+                ip_address=local_ip,
+                device_name="This Computer (Host)"
+            )]
+
             for sent, received in result:
                 devices.append(DeviceProfile(
                     ip_address=received.psrc,
