@@ -22,10 +22,9 @@ class ReportGenerator:
         for device in devices:
             status = "ATTENTION REQUIRED" if device.get("findings") else "SECURE"
             pdf.set_font("helvetica", "B", 11)
-            pdf.cell(0, 10, f"IP: {device['ip']} | Status: {status}", ln=True)
+            pdf.cell(0, 10, f"IP: {device['ip_address']} | Status: {status}", ln=True)
 
             pdf.set_font("helvetica", "", 11)
-            # Loop through findings dynamically
             for finding in device.get("findings", []):
                 pdf.cell(0, 8, f"  > Risk Detected: {finding}", ln=True)
             pdf.ln(2)

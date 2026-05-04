@@ -7,3 +7,4 @@ class DeviceProfile(BaseModel):
     operating_system: Optional[str] = "Unknown"
     open_ports: List[int] = []
     risk_level: str = "Low"
+    findings: List[str] = []

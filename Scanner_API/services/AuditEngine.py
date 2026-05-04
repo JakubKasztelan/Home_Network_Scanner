@@ -1,5 +1,6 @@
+import os
 import socket
-
+import json
 from scapy.layers.inet import IP, TCP
 from scapy.layers.l2 import ARP, Ether
 from scapy.sendrecv import srp, sr1
@@ -8,6 +9,12 @@ from models.device import DeviceProfile
 
 
 class AuditEngine:
+    def __init__(self):
+        base_path = os.path.dirname(os.path.dirname(__file__))
+        db_path = os.path.join(base_path, "data", "ports.json")
+        with open(db_path, "r") as f:
+            self.target_ports = [int(p) for p in json.load(f).keys()]
+
     def perform_ping_scan(self) -> list[DeviceProfile]:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -42,17 +49,11 @@ class AuditEngine:
             return []
 
     def scan_high_risk_ports(self, ip: str) -> list[int]:
-        high_risk_ports = [21, 23, 80, 445]
         open_ports = []
-
-        for port in high_risk_ports:
+        for port in self.target_ports:
             packet = IP(dst=ip) / TCP(dport=port, flags="S")
-
             response = sr1(packet, timeout=0.5, verbose=0)
 
-            if response and response.haslayer(TCP):
-                if response.getlayer(TCP).flags == 0x12:
-                    open_ports.append(port)
-                    sr1(IP(dst=ip) / TCP(dport=port, flags="R"), timeout=0.5, verbose=0)
-
+            if response and response.haslayer(TCP) and response.getlayer(TCP).flags == 0x12:
+                open_ports.append(port)
         return open_ports

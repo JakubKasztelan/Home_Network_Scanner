@@ -1,0 +1,18 @@
+{
+    "21": {
+        "label": "Unsecured File Cabinet (FTP)",
+        "weight": 20
+    },
+    "23": {
+        "label": "Unlocked Front Door (Telnet)",
+        "weight": 30
+    },
+    "80": {
+        "label": "Unprotected Web Service (HTTP)",
+        "weight": 10
+    },
+    "445": {
+        "label": "Shared Storage Exposed (SMB)",
+        "weight": 25
+    }
+}
