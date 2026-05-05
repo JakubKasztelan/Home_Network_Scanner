@@ -42,6 +42,7 @@ Run the backend server (Note: Sudo/Administrator privileges are required for Sca
 `Bash
 sudo python main.py
 `
+
 The API will be available at http://localhost:8000.
 
 ### 3. Frontend Setup (network-scanner-frontend)
@@ -51,11 +52,13 @@ Navigate to the frontend directory and install the dependencies:
 cd network-scanner-frontend
 npm install
 `
+
 Start the Angular development server:
 
 `Bash
 npm start
 `
+
 The dashboard will be available at http://localhost:4200.
 
 ## How to Use
