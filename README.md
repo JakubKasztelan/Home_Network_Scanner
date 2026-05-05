@@ -24,40 +24,40 @@ The full technical requirements, system architecture and design specifications f
 ### 1. Download the Repository
 Clone the repository to your local machine:
 
-`Bash
+```Bash
 git clone https://github.com/jakubkasztelan/home_network_scanner.git
 cd home_network_scanner
-`
+```
 
 ### 2. Backend Setup (Scanner_API)
 Navigate to the API directory and install the required Python packages:  
 
-`Bash
+```Bash
 cd Scanner_API
 pip install fastapi uvicorn scapy fpdf2
-`
+```
 
 Run the backend server (Note: Sudo/Administrator privileges are required for Scapy to perform network scans):  
 
-`Bash
+```Bash
 sudo python main.py
-`
+```
 
 The API will be available at http://localhost:8000.
 
 ### 3. Frontend Setup (network-scanner-frontend)
 Navigate to the frontend directory and install the dependencies:  
 
-`Bash
+```Bash
 cd network-scanner-frontend
 npm install
-`
+```
 
 Start the Angular development server:
 
-`Bash
+```Bash
 npm start
-`
+```
 
 The dashboard will be available at http://localhost:4200.
 
