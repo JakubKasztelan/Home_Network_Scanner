@@ -1,4 +1,4 @@
-from models.device import DeviceProfile
+from models.DeviceProfile import DeviceProfile
 import json
 import os
 

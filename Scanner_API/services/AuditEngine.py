@@ -5,7 +5,7 @@ from scapy.layers.inet import IP, TCP
 from scapy.layers.l2 import ARP, Ether
 from scapy.sendrecv import srp, sr1
 
-from models.device import DeviceProfile
+from models.DeviceProfile import DeviceProfile
 
 
 class AuditEngine:

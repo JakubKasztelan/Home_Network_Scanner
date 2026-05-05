@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from starlette.responses import FileResponse
 
-from services.Analyzer import SecurityAnalyzer
+from services.SecurityAnalyzer import SecurityAnalyzer
 from services.AuditEngine import AuditEngine
 from services.ReportGenerator import ReportGenerator
 

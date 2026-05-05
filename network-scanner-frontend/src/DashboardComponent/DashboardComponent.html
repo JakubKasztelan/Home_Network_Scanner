@@ -15,7 +15,8 @@
   </div>
 </div>
 
-<div class="actions" style="text-align: center; margin-bottom: 40px; display: flex; justify-content: center; gap: 15px;">
+<div class="actions"
+     style="text-align: center; margin-bottom: 40px; display: flex; justify-content: center; gap: 15px;">
   <button class="btn-primary" (click)="runScan()" [disabled]="isScanning">
     @if (isScanning) {
       <span class="spinner"></span> Analyzing...
@@ -40,8 +41,13 @@
         </div>
 
         <div class="badge-container">
-        <span class="badge" [class.badge-secure]="device.findings.length === 0" [class.badge-risk]="device.findings.length > 0">
-          {{ device.findings.length === 0 ? 'Secure' : device.findings.length + ' Risks' }}
+        <span class="badge" [class.badge-secure]="device.findings.length === 0"
+              [class.badge-risk]="device.findings.length > 0">
+            {{
+            device.findings.length === 0
+              ? 'Secure'
+              : device.findings.length + ' ' + (device.findings.length === 1 ? 'Risk' : 'Risks')
+          }}
         </span>
           <span class="expand-icon">{{ device.expanded ? '−' : '+' }}</span>
         </div>
