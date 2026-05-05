@@ -1,0 +1,67 @@
+<div class="gauge-container">
+  <svg class="gauge-svg" viewBox="0 0 100 100">
+    <circle class="gauge-background" cx="50" cy="50" r="40"></circle>
+    <circle class="gauge-progress" cx="50" cy="50" r="40"
+            [style.stroke-dasharray]="(healthScore * 2.51) + ', 251'"
+            [style.stroke]="healthScore > 70 ? '#10b981' : healthScore > 40 ? '#f59e0b' : '#ef4444'">
+    </circle>
+  </svg>
+
+  <div class="gauge-text">
+    <h1 [style.color]="healthScore > 70 ? '#10b981' : (healthScore > 40 ? '#f59e0b' : '#ef4444')">
+      {{ healthScore }}%
+    </h1>
+    <p>HEALTH</p>
+  </div>
+</div>
+
+<div class="actions" style="text-align: center; margin-bottom: 40px; display: flex; justify-content: center; gap: 15px;">
+  <button class="btn-primary" (click)="runScan()" [disabled]="isScanning">
+    @if (isScanning) {
+      <span class="spinner"></span> Analyzing...
+    } @else {
+      Run Security Audit
+    }
+  </button>
+
+  <button class="btn-secondary" (click)="downloadReport()" [disabled]="isScanning || devices.length === 0">
+    Download PDF Report
+  </button>
+</div>
+
+<div class="device-grid">
+  @for (device of devices; track device.ip_address) {
+    <div class="device-card" [class.vulnerable]="device.findings.length > 0">
+
+      <div class="card-header" (click)="toggleDevice(device)">
+        <div class="device-info">
+          <h3>{{ device.ip_address }}</h3>
+          <span class="device-name">{{ device.device_name }}</span>
+        </div>
+
+        <div class="badge-container">
+        <span class="badge" [class.badge-secure]="device.findings.length === 0" [class.badge-risk]="device.findings.length > 0">
+          {{ device.findings.length === 0 ? 'Secure' : device.findings.length + ' Risks' }}
+        </span>
+          <span class="expand-icon">{{ device.expanded ? '−' : '+' }}</span>
+        </div>
+      </div>
+
+      @if (device.expanded) {
+        <div class="card-content">
+          <hr>
+          <p><strong>System:</strong> {{ device.operating_system }}</p>
+          <div class="findings-list">
+            @for (risk of device.findings; track risk) {
+              <p>• {{ risk }}</p>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @empty {
+    <div class="empty-state">
+      <p>No audit data available. Click "Run Security Audit" to start discovery.</p>
+    </div>
+  }
+</div>
